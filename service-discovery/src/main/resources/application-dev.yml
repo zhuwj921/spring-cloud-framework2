@@ -1,0 +1,14 @@
+eureka:
+  instance:
+    appname: 服务发现    #服务名，默认取 spring.application.name 配置值，如果没有则为 unknown
+    hostname: 127.0.0.1  #当前实例的主机名称
+    instance-id: carbon-service-discovery  # 指定该Eureka实例的id
+    prefer-ip-address: true #不使用主机名来定义注册中心的地址，而使用IP地址的形式
+    ip-address:  127.0.0.1  #ip地址配置
+  server:
+    eviction-interval-timer-in-ms: 5000 #eureka server清理无效节点的时间间隔，默认60000毫秒，即60秒
+  client:
+    registerWithEureka: false  #启动服务注册
+    fetchRegistry: false #检索服务
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/  #指定服务注册中心地址
