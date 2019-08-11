@@ -1,0 +1,12 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8500/eureka/    # 注册服务地址
+    instance:
+      instance-id: service-gateway  #在信息列表中显示主机名称
+      prefer-ip-address: true   #访问的路径变为IP地址
+    healthcheck:
+          enabled: false
+  instance:
+    lease-expiration-duration-in-seconds: 5   # 表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间
+    lease-renewal-interval-in-seconds: 5      # eureka client发送心跳给server端的频率 默认30秒

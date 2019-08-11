@@ -2,7 +2,7 @@ eureka:
   instance:
     appname: 服务发现    #服务名，默认取 spring.application.name 配置值，如果没有则为 unknown
     hostname: 127.0.0.1  #当前实例的主机名称
-    instance-id: carbon-service-discovery  # 指定该Eureka实例的id
+    instance-id: service-discovery  # 指定该Eureka实例的id
     prefer-ip-address: true #不使用主机名来定义注册中心的地址，而使用IP地址的形式
     ip-address:  127.0.0.1  #ip地址配置
   server:

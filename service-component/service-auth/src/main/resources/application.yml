@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-auth
+eureka:
+  instance:
+    appname: 授权服务
+server:
+  port: 8520
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true  #开启下划线转驼峰

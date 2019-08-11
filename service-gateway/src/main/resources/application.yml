@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-gateway
+eureka:
+  instance:
+    appname: 网关服务
+server:
+  port: 8510
+

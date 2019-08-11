@@ -5,6 +5,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>service-discovery</module>
+        <module>service-component</module>
+        <module>service-common</module>
+        <module>service-gateway</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -21,6 +24,10 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+        <hutool.version>4.6.1</hutool.version>
+        <springfox-swagger2.version>2.6.1</springfox-swagger2.version>
+        <mybatis-plus.version>3.1.2</mybatis-plus.version>
+        <velocity-engine-core.version>2.1</velocity-engine-core.version>
     </properties>
 
     <dependencyManagement>

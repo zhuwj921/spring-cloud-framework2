@@ -1,0 +1,33 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8500/eureka/    # 注册服务地址
+    instance:
+      instance-id: service-user  #在信息列表中显示主机名称
+    healthcheck:
+          enabled: false
+  instance:
+    lease-expiration-duration-in-seconds: 5   # 表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间
+    lease-renewal-interval-in-seconds: 5 # eureka client发送心跳给server端的频率 默认30秒
+    prefer-ip-address: true
+
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/cloud-user?autoReconnect=true&autoReconnectForPools=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true
+    username: root
+    password: cXLtoAfE85WkUi5R
+    driver-class: com.mysql.jdbc.Driver
+  provider:
+    id: user
+    client-id: provider
+    client-secret: provider
+    token-info-uri: http://127.0.0.1:8520/oauth/token
+security:
+  oauth2:
+    resource:
+      id: service-user
+      user-info-uri: http://127.0.0.1:8520/user
+      prefer-token-info: false
+
+
+
