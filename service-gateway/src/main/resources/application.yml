@@ -3,9 +3,32 @@ spring:
     active: dev
   application:
     name: service-gateway
+  cloud:
+    gateway:
+      locator:
+        enabled: true
+      routes:
+        # 认证中心
+        - id: service-auth
+          uri: lb://service-auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1  #截取前缀：auth，使用后面真正的访问路径
+      discovery:
+        #locator:
+          # 是否可以通过其他服务的serviceId来转发到具体的服务实例。默认为false
+          #enabled: true   # 为true,自动创建路由,路由访问方式：http://Gateway_HOST:Gateway_PORT/大写的serviceId/**，其中微服务应用名默认大写访问
+          #lower-case-service-id: true #将请求路径上的服务名配置为小写（因为服务注册的时候，向注册中心注册时将服务名转成大写的了,比如以/service-hi/*的请求路径被路由转发到服务名为service-hi的服务上
+
+  main:
+    allow-bean-definition-overriding: true
 eureka:
   instance:
     appname: 网关服务
 server:
   port: 8510
+logging:
+  level:
+    org.springframework.cloud.gateway: debug  #定义日志级别
 

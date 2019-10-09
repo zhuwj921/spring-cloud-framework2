@@ -21,4 +21,9 @@ public interface GlobalContanst {
      */
     Integer DEFAULT_PID = -1;
 
+    /**
+     * 菜单
+     */
+    String MENU = "0";
+
 }

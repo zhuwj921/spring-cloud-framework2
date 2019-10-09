@@ -28,6 +28,8 @@
         <springfox-swagger2.version>2.6.1</springfox-swagger2.version>
         <mybatis-plus.version>3.1.2</mybatis-plus.version>
         <velocity-engine-core.version>2.1</velocity-engine-core.version>
+        <druid.version>1.1.18</druid.version>
+        <com.github.pagehelper.version>1.2.12</com.github.pagehelper.version>
     </properties>
 
     <dependencyManagement>

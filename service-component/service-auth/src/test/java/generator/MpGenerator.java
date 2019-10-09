@@ -26,7 +26,7 @@ public class MpGenerator {
     public static void main(String[] args) {
 
         //生成的表名
-        String[] tables =new String[] { "oauth_client_details"};
+        String[] tables =new String[] { "sys_role_menu"};
 
 
         AutoGenerator mpg = new AutoGenerator();
@@ -34,7 +34,7 @@ public class MpGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/service-component/service-auth//src/main/java");
+        gc.setOutputDir(projectPath + "/service-component/service-auth/src/main/java");
         gc.setFileOverride(true);
         gc.setActiveRecord(true);// 不需要ActiveRecord特性的请改为false
         gc.setEnableCache(false);// XML 二级缓存
@@ -53,10 +53,10 @@ public class MpGenerator {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);
-        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("cXLtoAfE85WkUi5R");
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/cloud-auth?characterEncoding=utf8");
+        dsc.setPassword("root");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/cloud-auth?serverTimezone=UTC");
         mpg.setDataSource(dsc);
 
         // 包配置
@@ -98,7 +98,7 @@ public class MpGenerator {
         // 自定义实体父类
         strategy.setSuperEntityClass("com.cloud.common.base.BaseEntity");
         // 自定义实体，公共字段
-        strategy.setSuperEntityColumns(new String[] { "id", "created","create_id","modified","modified_id" });
+        strategy.setSuperEntityColumns(new String[] { "id", "uuid","create_time","create_id","update_time","update_id","deleted" });
         // 自定义 mapper 父类
         // strategy.setSuperMapperClass("com.baomidou.demo.TestMapper");
         // 自定义 service 父类

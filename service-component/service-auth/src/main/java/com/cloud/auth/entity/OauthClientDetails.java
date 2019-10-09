@@ -10,16 +10,12 @@ import java.io.Serializable;
  * </p>
  *
  * @author zhuwj
- * @since 2019-08-11
+ * @since 2019-08-31
  */
 public class OauthClientDetails extends BaseEntity<OauthClientDetails> {
 
 
-    private Integer createdId;
-
     private String clientId;
-
-    private Integer deleted;
 
     private String resourceIds;
 
@@ -42,28 +38,12 @@ public class OauthClientDetails extends BaseEntity<OauthClientDetails> {
     private String autoapprove;
 
 
-    public Integer getCreatedId() {
-        return createdId;
-    }
-
-    public void setCreatedId(Integer createdId) {
-        this.createdId = createdId;
-    }
-
     public String getClientId() {
         return clientId;
     }
 
     public void setClientId(String clientId) {
         this.clientId = clientId;
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
     }
 
     public String getResourceIds() {
@@ -154,9 +134,7 @@ public class OauthClientDetails extends BaseEntity<OauthClientDetails> {
     @Override
     public String toString() {
         return "OauthClientDetails{" +
-        "createdId=" + createdId +
-        ", clientId=" + clientId +
-        ", deleted=" + deleted +
+        "clientId=" + clientId +
         ", resourceIds=" + resourceIds +
         ", clientSecret=" + clientSecret +
         ", scope=" + scope +

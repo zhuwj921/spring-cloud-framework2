@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
 
 /**
- * Description: oauth 客户端请求配置信息
+ * Description: oauth 客户端请求配置信息  持久化客户端请求信息
  * Date:      2019/8/11 15:36
  * author     zhuwj
  * version    V1.0

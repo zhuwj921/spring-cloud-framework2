@@ -5,6 +5,8 @@ import com.cloud.auth.security.SecurityUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.support.collections.RedisStore;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -14,6 +16,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 /**
  * ClassName: 授权服务配置
@@ -28,32 +31,26 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Autowired
     private AuthenticationManager authenticationManager;
-//    @Autowired
-//    private RedisConnectionFactory connectionFactory;
+    @Autowired
+    private RedisConnectionFactory connectionFactory;
     @Autowired
     private SecurityClientDetailsServiceImpl securityClientDetailsService;
     @Autowired
     private SecurityUserDetailsServiceImpl securityUserDetailsService;
 
+    @Bean
+    public RedisTokenStore tokenStore() {
+        return new RedisTokenStore(connectionFactory);
+    }
 
-
-//    @Bean
-//    public UserDetailsService userDetailsService(){
-//        return new SecurityUserDetailsServiceImpl();
-//    }
-//
-//    @Bean
-//    public ClientDetailsService clientDetailsService(){
-//        return new SecurityClientDetailsServiceImpl();
-//    }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
                 .authenticationManager(authenticationManager)
                 .userDetailsService(securityUserDetailsService)//若无，refresh_token会有UserDetailsService is required错误
-                //    .tokenStore(tokenStore());
-                .tokenStore(new InMemoryTokenStore());
+                    .tokenStore(tokenStore());
+                //.tokenStore(new InMemoryTokenStore());
     }
 
     @Override

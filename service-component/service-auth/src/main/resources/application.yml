@@ -5,7 +5,7 @@ spring:
     name: service-auth
 eureka:
   instance:
-    appname: 授权服务
+    appname: service-auth
 server:
   port: 8520
 

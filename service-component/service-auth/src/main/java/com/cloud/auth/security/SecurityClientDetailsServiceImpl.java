@@ -1,13 +1,15 @@
 package com.cloud.auth.security;
 
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.cloud.auth.entity.OauthClientDetails;
+import com.cloud.auth.entity.SysUser;
 import com.cloud.auth.service.IOauthClientDetailsService;
+import com.cloud.common.util.PasswordEncodeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
@@ -24,15 +26,16 @@ import org.springframework.stereotype.Service;
 public class SecurityClientDetailsServiceImpl implements ClientDetailsService {
 
     private static final Logger logger = LoggerFactory.getLogger(SecurityClientDetailsServiceImpl.class);
+
     @Autowired
     private IOauthClientDetailsService oauthClientDetailsService;
 
     @Override
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
         logger.info("当前登入客户端->"+clientId);
-        QueryWrapper<OauthClientDetails> qw = new QueryWrapper<OauthClientDetails>();
-        qw.eq("client_id",clientId);
-        OauthClientDetails oauthClientDetails = oauthClientDetailsService.getOne(qw);
+        OauthClientDetails oauthClientDetails = oauthClientDetailsService.getOne(Wrappers.<OauthClientDetails>query()
+                .lambda().eq(OauthClientDetails::getClientId, clientId));
+
         String clientSecret = oauthClientDetails.getClientSecret();
         String resourceIds = oauthClientDetails.getResourceIds();
         String scopes = oauthClientDetails.getScope();
@@ -45,8 +48,7 @@ public class SecurityClientDetailsServiceImpl implements ClientDetailsService {
         baseClientDetails.setRefreshTokenValiditySeconds(refreshTokenValiditySeconds);
         baseClientDetails.setAccessTokenValiditySeconds(accessTokenValiditySeconds);
         baseClientDetails.setClientId(clientId);
-        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        clientSecret= passwordEncoder.encode(clientSecret);
+        clientSecret= PasswordEncodeUtil.encode(clientSecret);
         baseClientDetails.setClientSecret(clientSecret);
         return baseClientDetails;
     }

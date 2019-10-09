@@ -2,10 +2,12 @@ package com.cloud.common.base;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Description: 基础实体信息
@@ -13,6 +15,7 @@ import java.util.Date;
  * author     zhuwj
  * version    V1.0
  */
+@Data
 public class BaseEntity<T> extends Model<BaseEntity<T>> {
 
     /**
@@ -20,66 +23,39 @@ public class BaseEntity<T> extends Model<BaseEntity<T>> {
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
+    /**
+     * 通用唯一识别码
+     */
+    private String uuid;
     /**
      * 创建时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    private Date created;
+    private LocalDateTime createTime;
     /**
      * 创建者id
      */
-    private Integer  createdId;
+    private Integer  createId;
     /**
      * 更新时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    private Date modified;
+    private LocalDateTime updateTime;
     /**
      * 更新者id
      */
-    private Integer modifiedId;
+    private Integer updateId;
     /**
      * 删除标志 0 正常 1 删除
      */
+    @TableLogic
     private Integer deleted;
 
-    public Integer getId() {
-        return id;
-    }
+    /**
+     * 版本号 默认0
+     */
+    private Integer version;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Integer getCreatedId() {
-        return createdId;
-    }
-
-    public void setCreatedId(Integer createdId) {
-        this.createdId = createdId;
-    }
-
-    public Date getModified() {
-        return modified;
-    }
-
-    public void setModified(Date modified) {
-        this.modified = modified;
-    }
-
-    public Integer getModifiedId() {
-        return modifiedId;
-    }
-
-    public void setModifiedId(Integer modifiedId) {
-        this.modifiedId = modifiedId;
-    }
 }

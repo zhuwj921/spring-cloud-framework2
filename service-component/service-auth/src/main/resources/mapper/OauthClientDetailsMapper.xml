@@ -5,12 +5,13 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cloud.auth.entity.OauthClientDetails">
     <result column="id" property="id" />
-    <result column="created" property="created" />
-    <result column="modified" property="modified" />
-    <result column="modified_id" property="modifiedId" />
-        <result column="created_id" property="createdId" />
+    <result column="uuid" property="uuid" />
+    <result column="create_time" property="createTime" />
+    <result column="create_id" property="createId" />
+    <result column="update_time" property="updateTime" />
+    <result column="update_id" property="updateId" />
+    <result column="deleted" property="deleted" />
         <result column="client_id" property="clientId" />
-        <result column="deleted" property="deleted" />
         <result column="resource_ids" property="resourceIds" />
         <result column="client_secret" property="clientSecret" />
         <result column="scope" property="scope" />

@@ -28,7 +28,7 @@ public class MpGenerator {
     public static void main(String[] args) {
 
         //生成的表名
-        String[] tables =new String[] { "oauth_client_details"};
+        String[] tables =new String[] { "user_role_relation"};
 
 
         AutoGenerator mpg = new AutoGenerator();
@@ -55,10 +55,10 @@ public class MpGenerator {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);
-        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("cXLtoAfE85WkUi5R");
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/cloud-user?characterEncoding=utf8");
+        dsc.setPassword("root");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/cloud-user?serverTimezone=UTC");
         mpg.setDataSource(dsc);
 
         // 包配置
@@ -100,7 +100,7 @@ public class MpGenerator {
         // 自定义实体父类
         strategy.setSuperEntityClass("com.cloud.common.base.BaseEntity");
         // 自定义实体，公共字段
-        strategy.setSuperEntityColumns(new String[] { "id", "created","create_id","modified","modified_id" });
+        strategy.setSuperEntityColumns(new String[] { "id", "created","created_id","modified","modified_id" ,"deleted"});
         // 自定义 mapper 父类
         // strategy.setSuperMapperClass("com.baomidou.demo.TestMapper");
         // 自定义 service 父类
